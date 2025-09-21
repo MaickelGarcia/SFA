@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Un Jardín para ti</title>
+    <!-- LO DIFICIL SE VUELVE FACIL SI ES PARA ESA BELLA CHICA MAICKEL, PODRÁS CON TODO EL CSS -->
     <style>
         * {
             margin: 0;
@@ -154,7 +155,6 @@
             transform-origin: center center;
         }
 
-        /* Rosa con capas de pétalos más realistas */
         .rose {
             width: 100%;
             height: 100%;
@@ -163,7 +163,6 @@
             filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
         }
 
-        /* Pétalos exteriores - más grandes y ondulados */
         .petal {
             position: absolute;
             background: linear-gradient(
@@ -184,7 +183,6 @@
                 0 2px 6px rgba(0,0,0,0.15);
         }
 
-        /* Textura natural en pétalos */
         .petal::before {
             content: '';
             position: absolute;
@@ -202,14 +200,12 @@
             border-radius: inherit;
         }
 
-        /* Capa exterior - pétalos grandes */
         .petal-outer {
             width: 28%;
             height: 35%;
             z-index: 1;
         }
 
-        /* Capa media - pétalos medianos */
         .petal-middle {
             width: 22%;
             height: 28%;
@@ -224,7 +220,6 @@
             );
         }
 
-        /* Capa interior - pétalos pequeños */
         .petal-inner {
             width: 16%;
             height: 22%;
@@ -239,7 +234,6 @@
             );
         }
 
-        /* Centro de la rosa */
         .rose::before {
             content: '';
             position: absolute;
@@ -276,7 +270,6 @@
                 0 1px 3px rgba(0,0,0,0.2);
         }
 
-        /* Vena de la hoja */
         .leaf::before {
             content: '';
             position: absolute;
@@ -371,7 +364,6 @@
             left: -50px;
         }
 
-        /* Animaciones */
         @keyframes growStem {
             0% {
                 height: 0;
@@ -523,7 +515,6 @@
             }
         }
 
-        /* Media Queries para móviles */
         @media (max-width: 768px) {
             .title {
                 font-size: clamp(1.2rem, 5vw, 1.8rem);
@@ -574,11 +565,10 @@
     </style>
 </head>
 <body>
-    <!-- Modal de inicio -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <div class="modal-title"></div>
-            <div class="modal-message">Te debo unas de Verdad</div>
+            <div class="modal-message">Te debo unas de Verdad 👑</div>
             <button class="play-button" id="playButton">
                  Reproducir Animación 
             </button>
@@ -592,7 +582,6 @@
         <h1 class="title">Un Jardín para ti</h1>
     </div>
 
-    <!-- Audio element para la música -->
     <audio id="backgroundMusic" loop>
         <source src="" type="audio/mpeg">
         <source src="" type="audio/wav">
@@ -600,30 +589,26 @@
     </audio>
 
     <script>
-        // Variables globales
         let gardenInstance = null;
         let musicStarted = false;
 
-        // Función para iniciar la animación y música
         function startAnimation() {
-            console.log('Starting animation...'); // Debug
+            console.log('Starting animation...'); 
             const modalOverlay = document.getElementById('modalOverlay');
             const garden = document.getElementById('garden');
             const audio = document.getElementById('backgroundMusic');
 
-            // Configurar la música (reemplaza con tu URL de Dropbox)
-            // IMPORTANTE: Cambia esta URL por la de tu archivo de música en Dropbox
+
             const musicUrl = 'https://www.dropbox.com/scl/fi/edmtvz91w1jw77vruqizn/FA.mp3?rlkey=g12p35wer5zbfwbvsw2sybvnf&st=kgidz1xy&dl=1';
             audio.src = musicUrl;
 
-            // Animar salida del modal
+
             modalOverlay.style.animation = 'fadeOutModal 0.8s ease-in-out forwards';
             
             setTimeout(() => {
                 modalOverlay.style.display = 'none';
                 garden.classList.add('active');
                 
-                // Iniciar música
                 if (musicUrl !== 'TU_URL_DE_DROPBOX_AQUI' && !musicStarted) {
                     audio.play().catch(error => {
                         console.log('No se pudo reproducir la música automáticamente:', error);
@@ -631,7 +616,6 @@
                     musicStarted = true;
                 }
 
-                // Inicializar jardín
                 gardenInstance = new YellowRoseGarden();
             }, 800);
         }
@@ -641,8 +625,8 @@
                 this.garden = document.querySelector('.garden');
                 this.flowers = [];
                 this.sparkles = [];
-                this.maxFlowers = 8; // Máximo 8 flores
-                this.flowerPositions = []; // Para rastrear posiciones y evitar superposiciones
+                this.maxFlowers = 8; 
+                this.flowerPositions = []; 
                 this.init();
             }
 
@@ -653,7 +637,6 @@
             }
 
             createInitialFlowers() {
-                // Crear 3 flores iniciales
                 for (let i = 0; i < 3; i++) {
                     setTimeout(() => {
                         this.createFlower();
@@ -661,9 +644,8 @@
                 }
             }
 
-            // Función para verificar si una posición se superpone con flores existentes
             isPositionValid(newX, newWidth) {
-                const minDistance = window.innerWidth < 768 ? 100 : 140; // Mayor distancia mínima
+                const minDistance = window.innerWidth < 768 ? 100 : 140; 
                 
                 for (let pos of this.flowerPositions) {
                     const distance = Math.abs(newX - pos.x);
@@ -674,9 +656,8 @@
                 return true;
             }
 
-            // Función para encontrar una posición válida
             findValidPosition() {
-                const flowerWidth = window.innerWidth < 768 ? 80 : 130; // Tamaños más grandes
+                const flowerWidth = window.innerWidth < 768 ? 80 : 130; 
                 const margin = flowerWidth / 2;
                 const availableWidth = window.innerWidth - (margin * 2);
                 
@@ -687,7 +668,6 @@
                     x = Math.random() * availableWidth + margin;
                     attempts++;
                     
-                    // Si no encuentra posición válida después de 25 intentos, usar grid
                     if (attempts > 25) {
                         return this.getGridPosition();
                     }
@@ -696,9 +676,8 @@
                 return x;
             }
 
-            // Función de respaldo para posicionamiento en grid
             getGridPosition() {
-                const flowerWidth = window.innerWidth < 768 ? 100 : 140; // Espaciado más amplio
+                const flowerWidth = window.innerWidth < 768 ? 100 : 140; 
                 const screenWidth = window.innerWidth;
                 const maxFlowersPerRow = Math.floor(screenWidth / flowerWidth);
                 const spacing = screenWidth / Math.min(this.maxFlowers, maxFlowersPerRow);
@@ -709,39 +688,33 @@
 
             createFlower() {
                 if (this.flowers.length >= this.maxFlowers) {
-                    return; // No crear más si ya hay 8
+                    return; 
                 }
 
                 const flower = document.createElement('div');
                 flower.className = 'flower';
                 
-                // Encontrar posición válida sin superposiciones
                 const x = this.findValidPosition();
                 
-                // Altura del tallo balanceada - más proporcionada en móvil
                 const stemHeight = window.innerWidth < 768 ? 
-                    Math.random() * 60 + 90 : // Móvil: 90-150px (más cortos)
-                    Math.random() * 100 + 140;  // Desktop: 140-240px
+                    Math.random() * 60 + 90 :
+                    Math.random() * 100 + 140; 
                 
                 flower.style.left = x + 'px';
                 flower.style.setProperty('--stem-height', stemHeight + 'px');
                 
-                // Guardar posición
                 this.flowerPositions.push({ x: x, element: flower });
                 
-                // Crear tallo
                 const stem = document.createElement('div');
                 stem.className = 'stem';
                 stem.style.height = '0px';
                 
-                // Crear rosa
                 const flowerBloom = document.createElement('div');
                 flowerBloom.className = 'flower-bloom';
                 
                 const rose = document.createElement('div');
                 rose.className = 'rose';
                 
-                // Crear pétalos exteriores (8 pétalos grandes)
                 for (let i = 0; i < 8; i++) {
                     const petal = document.createElement('div');
                     petal.className = 'petal petal-outer';
@@ -750,7 +723,6 @@
                     rose.appendChild(petal);
                 }
                 
-                // Crear pétalos medios (6 pétalos medianos)
                 for (let i = 0; i < 6; i++) {
                     const petal = document.createElement('div');
                     petal.className = 'petal petal-middle';
@@ -759,7 +731,6 @@
                     rose.appendChild(petal);
                 }
                 
-                // Crear pétalos interiores (4 pétalos pequeños)
                 for (let i = 0; i < 4; i++) {
                     const petal = document.createElement('div');
                     petal.className = 'petal petal-inner';
@@ -770,7 +741,6 @@
                 
                 flowerBloom.appendChild(rose);
                 
-                // Crear hojas
                 const leftLeaf = document.createElement('div');
                 leftLeaf.className = 'leaf left';
                 leftLeaf.style.setProperty('--leaf-rotation', '-25deg');
@@ -779,7 +749,6 @@
                 rightLeaf.className = 'leaf right';
                 rightLeaf.style.setProperty('--leaf-rotation', '25deg');
                 
-                // Ensamblar flor
                 stem.appendChild(flowerBloom);
                 stem.appendChild(leftLeaf);
                 stem.appendChild(rightLeaf);
@@ -798,13 +767,11 @@
                     if (flower.parentNode) {
                         flower.parentNode.removeChild(flower);
                     }
-                    // Remover de la lista de flores
                     const flowerIndex = this.flowers.indexOf(flower);
                     if (flowerIndex > -1) {
                         this.flowers.splice(flowerIndex, 1);
                     }
                     
-                    // Remover de la lista de posiciones
                     const positionIndex = this.flowerPositions.findIndex(pos => pos.element === flower);
                     if (positionIndex > -1) {
                         this.flowerPositions.splice(positionIndex, 1);
@@ -813,7 +780,7 @@
             }
 
             createSparkles() {
-                const sparkleCount = window.innerWidth < 768 ? 10 : 15; // Más sparkles para 8 flores
+                const sparkleCount = window.innerWidth < 768 ? 10 : 15; 
                 for (let i = 0; i < sparkleCount; i++) {
                     const sparkle = document.createElement('div');
                     sparkle.className = 'sparkle';
@@ -831,37 +798,33 @@
                     if (this.flowers.length < this.maxFlowers) {
                         this.createFlower();
                     } else {
-                        // Remover la flor más antigua si hay 8
                         const oldestFlower = this.flowers[0];
                         this.removeFlower(oldestFlower);
                         
-                        // Crear nueva flor después de un pequeño delay
                         setTimeout(() => {
                             this.createFlower();
                         }, 2000);
                     }
-                }, 6000); // Intervalo un poco más rápido para 8 flores
+                }, 6000); 
             }
         }
 
-        // Event listeners
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM loaded'); // Debug
+            console.log('DOM loaded'); 
             const playButton = document.getElementById('playButton');
             const modalOverlay = document.getElementById('modalOverlay');
             
-            console.log('Play button:', playButton); // Debug
-            console.log('Modal overlay:', modalOverlay); // Debug
+            console.log('Play button:', playButton); 
+            console.log('Modal overlay:', modalOverlay); 
             
             if (playButton) {
                 playButton.addEventListener('click', startAnimation);
-                console.log('Event listener added'); // Debug
+                console.log('Event listener added'); 
             } else {
                 console.error('Play button not found!');
             }
         });
 
-        // Click para crear flores (solo si hay menos de 8 y la animación ya empezó)
         document.addEventListener('click', (e) => {
             if ((e.target === document.body || e.target.classList.contains('garden')) && gardenInstance) {
                 const existingFlowers = document.querySelectorAll('.flower').length;
@@ -871,7 +834,6 @@
             }
         });
 
-        // Manejar cambios de orientación en móviles
         window.addEventListener('orientationchange', () => {
             if (gardenInstance) {
                 setTimeout(() => {
@@ -882,3 +844,4 @@
     </script>
 </body>
 </html>
+
